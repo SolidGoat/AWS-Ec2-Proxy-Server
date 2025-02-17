@@ -55,7 +55,7 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
 
     // ****Ec2 Instance****
     const ami = ec2.MachineImage.fromSsmParameter(
-      `/aws/service/canonical/ubuntu/server/${config.RELEASE}/stable/current/amd64/hvm/ebs-gp3/ami-id`
+      `/aws/service/canonical/ubuntu/server/${config.RELEASE}/stable/current/${config.INSTANCE_ARCH}/hvm/ebs-gp3/ami-id`
     );
 
     const ec2InstanceType = new ec2.InstanceType(
