@@ -8,5 +8,9 @@ const config = getConfig();
 const app = new cdk.App();
 
 new AwsEc2ProxyServerV2Stack(app, "AwsEc2ProxyServerV2Stack", {
+  env: {
+    region: config.REGION,
+    account: config.ACCOUNT,
+  },
   config,
 });

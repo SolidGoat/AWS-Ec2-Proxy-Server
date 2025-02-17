@@ -8,6 +8,8 @@ export type ConfigProps = {
   RELEASE: string;
   INSTANCE_CLASS: string;
   INSTANCE_SIZE: string;
+  REGION: string;
+  ACCOUNT: string;
 };
 
 export const getConfig = (): ConfigProps => ({
@@ -15,4 +17,6 @@ export const getConfig = (): ConfigProps => ({
   RELEASE: (process.env.RELEASE || "noble").toLowerCase(),
   INSTANCE_CLASS: process.env.INSTANCE_CLASS || "t4g",
   INSTANCE_SIZE: process.env.INSTANCE_SIZE || "nano",
+  REGION: process.env.REGION || "us-east-1",
+  ACCOUNT: process.env.ACCOUNT || "",
 });
