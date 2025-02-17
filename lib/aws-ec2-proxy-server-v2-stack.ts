@@ -1,11 +1,21 @@
 import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
+import { ConfigProps } from "./config";
 
-const RELEASE = "24.04";
+type AwsEc2ProxyServerV2StackProps = cdk.StackProps & {
+  config: Readonly<ConfigProps>;
+};
+
 export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    props: AwsEc2ProxyServerV2StackProps
+  ) {
     super(scope, id, props);
+
+    const { config } = props;
 
     // ****VPC****
 
@@ -31,7 +41,7 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4("0.0.0.0/0"),
+      ec2.Peer.ipv4(config.IP),
       ec2.Port.SSH,
       "Allow SSH"
     );
@@ -46,15 +56,16 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
 
     // ****Ec2 Instance****
     const ami = ec2.MachineImage.fromSsmParameter(
-      `/aws/service/canonical/ubuntu/server/${RELEASE}/stable/current/amd64/hvm/ebs-gp3/ami-id`
+      `/aws/service/canonical/ubuntu/server/${config.RELEASE}/stable/current/amd64/hvm/ebs-gp3/ami-id`
+    );
+
+    const ec2InstanceType = new ec2.InstanceType(
+      `${config.INSTANCE_CLASS}.${config.INSTANCE_SIZE}`
     );
 
     const ec2Instance = new ec2.Instance(this, "ProxyServer-Instance", {
       vpc: vpc,
-      instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.T4G,
-        ec2.InstanceSize.NANO
-      ),
+      instanceType: ec2InstanceType,
       machineImage: ami,
       associatePublicIpAddress: true,
       keyPair: keyPair,
