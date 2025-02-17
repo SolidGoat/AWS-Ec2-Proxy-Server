@@ -18,15 +18,15 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
     const { config } = props;
 
     // ****VPC****
-
     const vpc = ec2.Vpc.fromLookup(this, "Vpc", { isDefault: false });
+    // ****VPC End****
 
+    // ****Key Pair****
     const keyPair = new ec2.KeyPair(this, "ProxyServer-KeyPair", {
       type: ec2.KeyPairType.ED25519,
       format: ec2.KeyPairFormat.PEM,
     });
-
-    // ****End of VPC****
+    // ****Key Pair End****
 
     // ****Security Group****
     const securityGroup = new ec2.SecurityGroup(
@@ -51,8 +51,7 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
       ec2.Port.tcp(8888),
       "Allow Tinyproxy on TCP/8888"
     );
-
-    // ****End of Security Group****
+    // ****Security Group End****
 
     // ****Ec2 Instance****
     const ami = ec2.MachineImage.fromSsmParameter(
@@ -74,8 +73,7 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
     });
 
     ec2Instance.addUserData("./lib/scripts/user-data.sh");
-
-    // ****End of Ec2 Instance****
+    // ****Ec2 Instance End****
 
     // ****Output****
     new cdk.CfnOutput(this, "Ec2PublicDNS", {
@@ -98,6 +96,6 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
       description: "SSM location of private key",
     });
 
-    // ****End of Output****
+    // ****Output End****
   }
 }
