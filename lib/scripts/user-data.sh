@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update OS
-apt-get update
+apt-get -y update
 apt-get -y upgrade
 
 # Install Tinyproxy and tmux

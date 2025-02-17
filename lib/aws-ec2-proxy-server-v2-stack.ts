@@ -2,6 +2,7 @@ import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
 import { ConfigProps } from "./config";
+import { readFileSync } from "fs";
 
 type AwsEc2ProxyServerV2StackProps = cdk.StackProps & {
   config: Readonly<ConfigProps>;
@@ -72,7 +73,14 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
     });
 
-    ec2Instance.addUserData("./lib/scripts/user-data.sh");
+    // Read user-data.sh script
+    // Replace ${INGRESS_IP} with IP from .env file
+    const userDataScript = readFileSync(
+      "./lib/scripts/user-data.sh",
+      "utf-8"
+    ).replace("${INGRESS_IP}", config.IP);
+
+    ec2Instance.addUserData(userDataScript);
     // ****Ec2 Instance End****
 
     // ****Output****
