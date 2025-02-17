@@ -47,7 +47,7 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4("0.0.0.0/0"),
+      ec2.Peer.ipv4(config.IP),
       ec2.Port.tcp(8888),
       "Allow Tinyproxy on TCP/8888"
     );
