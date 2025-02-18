@@ -9,3 +9,6 @@ cdk.out
 
 # Environment variables
 .env
+
+# Private key files
+.pem
