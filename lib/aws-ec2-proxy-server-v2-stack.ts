@@ -95,13 +95,13 @@ export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, "Socks5Command", {
-      value: `ssh -i ${keyPair.keyPairName}.pem -D 8081 ubuntu@${ec2Instance.instancePublicIp}`,
+      value: `ssh -i private.pem -D 8081 ubuntu@${ec2Instance.instancePublicIp}`,
       description: "SSH dynamic port forward for SOCKS5 proxy",
     });
 
-    new cdk.CfnOutput(this, "SsmPrivateKeyLocation", {
-      value: `/ec2/keypair/${keyPair.keyPairId}`,
-      description: "SSM location of private key",
+    new cdk.CfnOutput(this, "SsmPrivateKeyCommand", {
+      value: `aws ssm get-parameter --name "/ec2/keypair/${keyPair.keyPairId}" --with-decryption`,
+      description: "SSM command to get private key from Parameter Store",
     });
 
     // ****Output End****
