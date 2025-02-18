@@ -4,15 +4,15 @@ import { Construct } from "constructs";
 import { ConfigProps } from "./config";
 import { readFileSync } from "fs";
 
-type AwsEc2ProxyServerV2StackProps = cdk.StackProps & {
+type AwsEc2ProxyServerStackProps = cdk.StackProps & {
   config: Readonly<ConfigProps>;
 };
 
-export class AwsEc2ProxyServerV2Stack extends cdk.Stack {
+export class AwsEc2ProxyServerStack extends cdk.Stack {
   constructor(
     scope: Construct,
     id: string,
-    props: AwsEc2ProxyServerV2StackProps
+    props: AwsEc2ProxyServerStackProps
   ) {
     super(scope, id, props);
 

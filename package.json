@@ -1,8 +1,8 @@
 {
-  "name": "aws-ec2-proxy-server-v2",
+  "name": "aws-ec2-proxy-server",
   "version": "0.1.0",
   "bin": {
-    "aws-ec2-proxy-server-v2": "bin/aws-ec2-proxy-server-v2.js"
+    "aws-ec2-proxy-server-v2": "bin/aws-ec2-proxy-server.js"
   },
   "scripts": {
     "build": "tsc",
