@@ -12,3 +12,6 @@ cdk.out
 
 # Private key files
 .pem
+
+# Pre-commit config
+.pre-commit-config.yaml
