@@ -16,9 +16,9 @@ https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html
    ```
    $ git clone https://github.com/SolidGoat/AWS-Ec2-Proxy-Server.git
    ```
-2. Download and install dependencies
+2. Download and install dependencies (if you don't already have CDK installed; otherwise skip this step)
    ```
-   $ npm build
+   $ npm install
    ```
 3. Set your environment variables
 
