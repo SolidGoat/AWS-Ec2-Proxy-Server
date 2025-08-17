@@ -34,6 +34,7 @@ https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html
    INSTANCE_ARCH="arm64"
    REGION="us-east-1"
    ACCOUNT=""
+   ENVIRONMENT="prod"
    ```
 
    1. To set these values:
