@@ -11,6 +11,7 @@ export type ConfigProps = {
   INSTANCE_ARCH: string;
   REGION: string;
   ACCOUNT: string;
+  ENVIRONMENT: string;
 };
 
 export const getConfig = (): ConfigProps => ({
@@ -23,4 +24,5 @@ export const getConfig = (): ConfigProps => ({
     : "amd64",
   REGION: process.env.REGION || "us-east-1",
   ACCOUNT: process.env.ACCOUNT || "",
+  ENVIRONMENT: process.env.ENVIRONMENT || "prod",
 });

@@ -7,10 +7,14 @@ const config = getConfig();
 
 const app = new cdk.App();
 
-new AwsEc2ProxyServerStack(app, "AwsEc2ProxyServerStack", {
-  env: {
-    region: config.REGION,
-    account: config.ACCOUNT,
-  },
-  config,
-});
+new AwsEc2ProxyServerStack(
+  app,
+  `AwsEc2ProxyServerStack-${config.ENVIRONMENT}`,
+  {
+    env: {
+      region: config.REGION,
+      account: config.ACCOUNT,
+    },
+    config,
+  }
+);
